@@ -68,15 +68,30 @@ $(".reveal", true).forEach((el, i) => {
 
 /* 5. Hero crops and floating particles (lightweight DOM, CSS animated) */
 const isSmall = window.innerWidth < 700;
-const cropBox = $("#crops");
-for (let i = 0; i < (isSmall ? 26 : 60); i++) {
-  const c = document.createElement("i");
-  c.className = "crop";
-  c.style.left = (i / (isSmall ? 26 : 60)) * 100 + Math.random() * 2 + "%";
-  c.style.height = 40 + Math.random() * 70 + "px";
-  c.style.animationDelay = -Math.random() * 3.5 + "s";
-  c.style.animationDuration = 2.8 + Math.random() * 2 + "s";
-  cropBox.appendChild(c);
+/* Birds: small silhouettes flying across the sky (CSS animated).
+   Smaller birds = farther away = slower and lighter, which looks natural. */
+const BIRD_SVG = `<svg viewBox="0 0 40 20"><path class="wing wl" d="M20 11 Q11 0 0 5 Q10 6 20 11Z"/><path class="wing wr" d="M20 11 Q29 0 40 5 Q30 6 20 11Z"/><ellipse cx="20" cy="11.5" rx="2.4" ry="1.4" fill="#10241a"/></svg>`;
+if (!reduceMotion) {
+  const box = $("#birds"), count = isSmall ? 6 : 10;
+  for (let i = 0; i < count; i++) {
+    const depth = Math.random();                 // 0 = far, 1 = near
+    const size = 14 + depth * 26;                // px
+    const b = document.createElement("div");
+    b.className = "bird";
+    b.style.width = size + "px";
+    b.style.top = 6 + Math.random() * 30 + "%";
+    b.style.opacity = 0.45 + depth * 0.45;
+    b.style.animationDuration = 38 - depth * 16 + Math.random() * 6 + "s";
+    b.style.animationDelay = -Math.random() * 40 + "s";
+    const inner = document.createElement("div");
+    inner.className = "bird-inner";
+    inner.style.animationDuration = 3 + Math.random() * 3 + "s";
+    inner.innerHTML = BIRD_SVG;
+    const flap = 0.45 + (1 - depth) * 0.25 + Math.random() * 0.15; // far birds flap a bit slower
+    inner.querySelectorAll(".wing").forEach(w => { w.style.animationDuration = flap + "s"; });
+    b.appendChild(inner);
+    box.appendChild(b);
+  }
 }
 if (!reduceMotion) {
   const pBox = $("#particles");

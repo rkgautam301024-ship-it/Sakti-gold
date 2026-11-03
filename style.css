@@ -151,4 +151,23 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green);b
   .reveal{opacity:1;transform:none}
   .stem{stroke-dashoffset:0}.leaf{transform:none}
 }
-<link rel="stylesheet" href="style.css">
+
+/* ===== Photo hero: farm background, birds, light ===== */
+.hero{background:#14391f}
+.hero-bg-wrap{position:absolute;left:0;right:0;top:-130px;bottom:-130px}
+.hero-bg{position:absolute;inset:0;background:url("hero.jpg") center/cover no-repeat;animation:kenburns 28s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1.02)}to{transform:scale(1.14) translateX(-1.5%)}}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,36,18,.55) 0%,rgba(8,36,18,.3) 45%,rgba(8,36,18,.55) 100%)}
+.sunlight{position:absolute;top:-10%;left:-10%;width:70%;height:90%;background:radial-gradient(ellipse at 20% 15%,rgba(255,236,170,.45),rgba(255,236,170,0) 60%);animation:shine 9s ease-in-out infinite alternate;mix-blend-mode:screen}
+@keyframes shine{from{opacity:.45}to{opacity:1}}
+#birds{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.bird{position:absolute;left:0;will-change:transform;animation:fly linear infinite}
+.bird-inner{animation:bob ease-in-out infinite}
+.bird svg{display:block;width:100%;height:auto;overflow:visible}
+.wing{fill:#10241a;transform-box:fill-box}
+.wl{transform-origin:100% 60%;animation:flapL ease-in-out infinite alternate}
+.wr{transform-origin:0% 60%;animation:flapR ease-in-out infinite alternate}
+@keyframes flapL{from{transform:rotate(22deg) scaleY(1)}to{transform:rotate(-34deg) scaleY(.7)}}
+@keyframes flapR{from{transform:rotate(-22deg) scaleY(1)}to{transform:rotate(34deg) scaleY(.7)}}
+@keyframes fly{from{transform:translateX(-12vw)}to{transform:translateX(112vw)}}
+@keyframes bob{50%{transform:translateY(-14px) rotate(-3deg)}}
