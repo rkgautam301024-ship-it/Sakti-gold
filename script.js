@@ -5,7 +5,7 @@
    Format: country code + number, digits only, no + or spaces.
    Example for India: "919876543210"
 ---------------------------------------------------------------- */
-const WHATSAPP_NUMBER = "91XXXXXXXXXX"; // <-- CHANGE THIS
+const WHATSAPP_NUMBER = "919250780259"; // <-- CHANGE THIS
 
 const $ = (s, all = false) => all ? [...document.querySelectorAll(s)] : document.querySelector(s);
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
